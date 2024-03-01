@@ -1,0 +1,188 @@
+---
+### Install
+graylog_version: "5.2"
+
+graylog_apt_deb_name: "graylog-{{ graylog_version }}-repository_latest.deb"
+graylog_apt_deb_url: "https://packages.graylog2.org/repo/packages/{{ graylog_apt_deb_name }}"
+graylog_yum_rpm_name: "graylog-{{ graylog_version }}-repository_latest.rpm"
+graylog_yum_rpm_url: "https://packages.graylog2.org/repo/packages/{{ graylog_yum_rpm_name }}"
+
+graylog_install_enterprise_plugins: false
+graylog_install_integrations_plugins: false
+graylog_install_enterprise_integrations_plugins: false
+
+graylog_tmp_install_dir: "/tmp"
+graylog_bin_dir: "/usr/share/graylog-server/bin"
+graylog_data_dir: "/var/lib/graylog-server"
+graylog_plugin_dir: "/usr/share/graylog-server/plugin"
+graylog_message_journal_dir: "/var/lib/graylog-server/journal"
+graylog_content_packs_dir: "/usr/share/graylog-server/contentpacks"
+
+### Configuration
+
+# General
+graylog_is_leader: true
+graylog_node_id_file: "/etc/graylog/server/node-id"
+graylog_password_secret: "bwcVGLdWfmRsYemfA9ecUAizDuZyocXgQkYc6XwZSjboQ68B2drp2oxXPEAQEE5SDDYWT7ijq84GdBKxQ78fsuqcNF1fCeQ5" #pwgen -N 1 -s 96
+graylog_root_username: "admin"
+graylog_root_password_sha2: "e3c652f0ba0b4801205814f8b6bc49672c4c74e25b497770bb89b22cdeb4e951" #echo -n yourpassword | shasum -a 256
+graylog_root_email: ""
+graylog_root_timezone: "UTC"
+#graylog_alert_check_interval: 60
+#graylog_disable_sigar: false
+graylog_disable_native_system_stats_collector: "false"
+graylog_skip_preflight_checks: false
+graylog_ignore_migration_failures: false
+graylog_system_event_excluded_types: ""
+graylog_content_stream_rss_url: ""
+graylog_content_stream_refresh_interval: "7d"
+graylog_event_definition_max_event_limit: 1000
+
+# HTTP
+graylog_http_bind_address: "0.0.0.0:9000"
+graylog_http_publish_uri: "http://127.0.0.1:9000/"
+graylog_http_external_uri: "http://127.0.0.1:9000/"
+graylog_http_enable_cors: false
+graylog_http_enable_gzip: true
+graylog_http_max_header_size: 8192
+graylog_http_thread_pool_size: 64
+
+# HTTPS
+graylog_http_enable_tls: false
+graylog_http_tls_cert_file: "/path/to/graylog.crt"
+graylog_http_tls_key_file: "/path/to/graylog.key"
+graylog_http_tls_key_password: ""
+graylog_stream_aware_field_types: false
+graylog_trusted_proxies: ""
+#graylog_http_max_initial_line_length: 4096
+
+# Search
+graylog_elasticsearch_hosts: "http://127.0.0.1:9200"
+graylog_elasticsearch_version_probe_attempts: 0
+graylog_elasticsearch_version_probe_delay: "5s"
+graylog_elasticsearch_max_total_connections: 200
+graylog_elasticsearch_max_total_connections_per_route: 20
+graylog_elasticsearch_max_retries: 2
+graylog_elasticsearch_discovery_enabled: false
+graylog_elasticsearch_discovery_filter: ""
+graylog_elasticsearch_discovery_default_scheme: "http"
+graylog_elasticsearch_discovery_frequency: "30s"
+graylog_elasticsearch_compression_enabled: false
+graylog_elasticsearch_use_expect_continue: true
+graylog_elasticsearch_index_prefix: "graylog"
+graylog_elasticsearch_template_name: "graylog-internal"
+graylog_default_events_index_prefix: "gl-events"
+graylog_default_system_events_index_prefix: "gl-system-events"
+graylog_elasticsearch_analyzer: "standard"
+graylog_elasticsearch_shards: 4
+graylog_elasticsearch_replicas: 0
+graylog_disable_index_optimization: true
+graylog_index_optimization_max_num_segments: 1
+graylog_index_field_type_periodical_full_refresh_interval: "5m"
+graylog_enabled_index_rotation_strategies: "time-size-optimizing"
+graylog_elasticsearch_disable_version_check: true
+graylog_allow_leading_wildcard_searches: false
+graylog_allow_highlighting: false
+graylog_field_value_suggestion_mode: "on"
+graylog_output_batch_size: 500
+graylog_output_flush_interval: 1
+graylog_elasticsearch_index_optimization_jobs: 10
+graylog_elasticsearch_mute_deprecation_warnings: false
+
+## Retention
+graylog_rotation_strategy: "time-size-optimizing"
+graylog_elasticsearch_rotate_empty_index_set: false
+graylog_max_index_retention_period: ""
+graylog_elasticsearch_max_write_index_age: "1d"
+graylog_no_retention: false
+graylog_elasticsearch_max_docs_per_index: 20000000
+graylog_elasticsearch_max_size_per_index: 1073741824
+graylog_elasticsearch_max_time_per_index: "1d"
+graylog_retention_strategy: "delete"
+graylog_disabled_retention_strategies: "none"
+graylog_elasticsearch_max_number_of_indices: 20
+
+## Processing
+graylog_processbuffer_processors: 5
+graylog_outputbuffer_processors: 3
+graylog_processor_wait_strategy: "blocking"
+graylog_message_journal_enabled: true
+graylog_message_journal_max_age: "12h"
+graylog_message_journal_max_size: "5gb"
+graylog_message_journal_flush_age: "1m"
+graylog_message_journal_flush_interval: 1000000
+graylog_message_journal_segment_age: "1h"
+graylog_message_journal_segment_size: "100mb"
+graylog_output_fault_count_threshold: 5
+graylog_output_fault_penalty_seconds: 30
+graylog_async_eventbus_processors: 2
+graylog_lb_recognition_period_seconds: 3
+graylog_lb_throttle_threshold_percentage: 95
+graylog_stream_processing_max_faults: 3
+graylog_processing_status_journal_write_rate_threshold: 1
+
+## Timeouts
+graylog_elasticsearch_connect_timeout: "10s"
+graylog_index_ranges_cleanup_interval: "1h"
+graylog_stream_processing_timeout: 2000
+graylog_output_module_timeout: 10000
+graylog_stale_leader_timeout: 2000
+graylog_shutdown_timeout: 30000
+graylog_http_connect_timeout: "5s"
+graylog_http_read_timeout: "10s"
+graylog_http_write_timeout: "10s"
+graylog_ldap_connection_timeout: 2000
+graylog_dashboard_widget_default_cache_time: "10s"
+graylog_elasticsearch_idle_timeout: "-1s"
+graylog_elasticsearch_socket_timeout: "60s"
+graylog_elasticsearch_index_optimization_timeout: "1h"
+graylog_transport_email_socket_connection_timeout: "10s"
+graylog_transport_email_socket_timeout: "10s"
+graylog_proxied_requests_default_call_timeout: "5s"
+
+# Content packs
+graylog_content_packs_loader_enabled: false
+graylog_content_packs_auto_install: ""
+graylog_enabled_tls_protocols: "TLSv1.2,TLSv1.3"
+graylog_prometheus_exporter_enable: false
+graylog_prometheus_exporter_bind_address: "127.0.0.1:9833"
+graylog_prometheus_exporter_mapping_file_path_core: "none"
+graylog_prometheus_exporter_mapping_file_path_custom: "none"
+graylog_prometheus_exporter_mapping_file_refresh_interval: "60s"
+graylog_allowed_auxiliary_paths: "/etc/graylog/data-files,/etc/custom-allowed-path"
+
+# Buffer
+graylog_ring_size: 65536
+graylog_inputbuffer_ring_size: 65536
+graylog_inputbuffer_processors: 2
+graylog_inputbuffer_wait_strategy: "blocking"
+graylog_outputbuffer_processor_threads_core_pool_size: 3
+graylog_udp_recvbuffer_sizes: 1048576
+
+## MongoDB
+graylog_mongodb_uri: "mongodb://127.0.0.1:27017/graylog"
+graylog_mongodb_max_connections: 100
+graylog_mongodb_version_probe_attempts: 5
+
+# Mail
+graylog_transport_email_enabled: false
+graylog_transport_email_hostname: ""
+graylog_transport_email_port: 587
+graylog_transport_email_use_auth: true
+graylog_transport_email_use_tls: true
+graylog_transport_email_use_ssl: false
+graylog_transport_email_auth_username: ""
+graylog_transport_email_auth_password: ""
+graylog_transport_email_subject_prefix: "[graylog]"
+graylog_transport_email_from_email: ""
+graylog_transport_email_web_interface_url: ""
+
+## Proxy
+graylog_http_proxy_uri: ""
+graylog_non_proxy_hosts: ""
+graylog_proxied_requests_thread_pool_size: 64
+graylog_processing_status_persist_interval: "1s"
+graylog_processing_status_update_threshold: "1m"
+
+# More
+graylog_additional_config: {}

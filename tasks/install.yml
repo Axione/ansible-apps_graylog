@@ -1,0 +1,43 @@
+---
+- include_tasks: "setup-{{ ansible_os_family }}.yml"
+
+- name: "Securise config dir"
+  ansible.builtin.file:
+    path: "/etc/graylog/server"
+    owner: "graylog"
+    group: "graylog"
+    mode: 0750
+
+- name: "Create directories"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "graylog"
+    group: "graylog"
+    mode: 0755
+    recurse: true
+    follow: true
+  loop:
+    - "{{ graylog_bin_dir }}"
+    - "{{ graylog_data_dir }}"
+    - "{{ graylog_plugin_dir }}"
+    - "{{ graylog_message_journal_dir }}"
+    - "{{ graylog_content_packs_dir }}"
+
+- name: "Configure server.conf"
+  ansible.builtin.template:
+    src: "graylog.server.conf.j2"
+    dest: "/etc/graylog/server/server.conf"
+    owner: "graylog"
+    group: "graylog"
+    mode: 0644
+  notify: "restart graylog-server"
+
+#- name: "Configure graylog defaul "
+#  ansible.builtin.template:
+#    src: "graylog.server.default.j2"
+#    dest: "{{ graylog_server_defaults_file_path }}"
+#    owner: "graylog"
+#    group: "graylog"
+#    mode: 0644
+#  notify: "restart graylog-server"

@@ -1,0 +1,48 @@
+---
+- name: "Install requirements"
+  ansible.builtin.apt:
+    name: "apt-transport-https"
+    state: present
+
+- name: "Download deb package"
+  ansible.builtin.get_url:
+    url: "{{ graylog_apt_deb_url }}"
+    dest: "{{ graylog_tmp_install_dir }}/{{ graylog_apt_deb_name }}"
+    mode: 0644
+
+- name: "Install deb package"
+  ansible.builtin.apt:
+    deb: "{{ graylog_tmp_install_dir }}/{{ graylog_apt_deb_name }}"
+    state: present
+    dpkg_options: "force-all"
+  notify: update apt
+
+- name: "Run handlers"
+  ansible.builtin.meta: flush_handlers
+
+- name: "Install graylog-server"
+  ansible.builtin.apt:
+    name: "graylog-server"
+    state: present
+  notify: "restart graylog-server"
+
+- name: "Installing graylog-enterprise-plugins"
+  ansible.builtin.apt:
+    name: "graylog-enterprise-plugins"
+    state: present
+  when: graylog_install_enterprise_plugins
+  notify: restart graylog-server
+
+- name: "Installing graylog-integrations-plugins"
+  ansible.builtin.apt:
+    name: "graylog-integrations-plugins"
+    state: present
+  when: graylog_install_integrations_plugins
+  notify: restart graylog-server
+
+- name: "Installing graylog-enterprise-integrations-plugins"
+  ansible.builtin.apt:
+    name: "graylog-enterprise-integrations-plugins"
+    state: present
+  when: graylog_install_enterprise_integrations_plugins
+  notify: restart graylog-server

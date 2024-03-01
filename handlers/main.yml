@@ -1,0 +1,14 @@
+---
+- name: "reload systemd configuration"
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: "restart graylog-server"
+  ansible.builtin.service:
+    name: "graylog-server"
+    state: "restarted"
+    enabled: true
+
+- name: "update apt"
+  ansible.builtin.apt:
+    update_cache: true
