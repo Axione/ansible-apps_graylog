@@ -10,25 +10,25 @@
   ansible.builtin.yum:
     name: "graylog-server"
     state: present
-  notify: restart graylog-server
+  notify: Restart graylog-server
 
 - name: "Installing graylog-enterprise-plugins"
   ansible.builtin.yum:
     name: "graylog-enterprise-plugins"
     state: present
   when: graylog_install_enterprise_plugins
-  notify: restart graylog-server
+  notify: Restart graylog-server
 
 - name: "Installing graylog-integrations-plugins"
   ansible.builtin.yum:
     name: "graylog-integrations-plugins"
     state: present
   when: graylog_install_integrations_plugins
-  notify: restart graylog-server
+  notify: Restart graylog-server
 
 - name: "Installing graylog-enterprise-integrations-plugins"
   ansible.builtin.yum:
     name: "graylog-enterprise-integrations-plugins"
     state: present
   when: graylog_install_enterprise_integrations_plugins
-  notify: restart graylog-server
+  notify: Restart graylog-server
