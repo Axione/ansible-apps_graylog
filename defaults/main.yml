@@ -1,6 +1,6 @@
 ---
 ### Install
-graylog_version: "5.2"
+graylog_version: "6.1"
 
 graylog_apt_deb_name: "graylog-{{ graylog_version }}-repository_latest.deb"
 graylog_apt_deb_url: "https://packages.graylog2.org/repo/packages/{{ graylog_apt_deb_name }}"
