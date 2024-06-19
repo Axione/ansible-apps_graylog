@@ -1,20 +1,22 @@
 ---
 - name: "Install requirements"
   ansible.builtin.apt:
-    name: "apt-transport-https"
+    name:
+      - apt-transport-https
+      - coreutils
     state: present
   register: pkg_result
   retries: 12
   delay: 10
   until: pkg_result is success
 
-- name: "Download deb package"
+- name: "Download repository deb package"
   ansible.builtin.get_url:
     url: "{{ graylog_apt_deb_url }}"
     dest: "{{ graylog_tmp_install_dir }}/{{ graylog_apt_deb_name }}"
     mode: 0644
 
-- name: "Install deb package"
+- name: "Install repository deb package"
   ansible.builtin.apt:
     deb: "{{ graylog_tmp_install_dir }}/{{ graylog_apt_deb_name }}"
     state: present

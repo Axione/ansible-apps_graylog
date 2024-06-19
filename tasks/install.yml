@@ -2,6 +2,19 @@
 - name: "Setup install"
   ansible.builtin.include_tasks: "setup-{{ ansible_os_family }}.yml"
 
+- name: "Crypt graylog_root_password to sha2"
+  ansible.builtin.shell: |
+    set -o pipefail
+    echo -n {{ graylog_root_password }} | sha256sum
+  changed_when: false
+  register: pwdsha2
+  args:
+    executable: /bin/bash
+
+- name: "Set graylog_root_password_sha2 var"
+  ansible.builtin.set_fact:
+    graylog_root_password_sha2: "{{ pwdsha2.stdout | split(' ') | first }}"
+
 - name: "Securise config dir"
   ansible.builtin.file:
     path: "/etc/graylog/server"

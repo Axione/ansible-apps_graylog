@@ -25,7 +25,7 @@ graylog_is_leader: true
 graylog_node_id_file: "/etc/graylog/server/node-id"
 graylog_password_secret: "bwcVGLdWfmRsYemfA9ecUAizDuZyocXgQkYc6XwZSjboQ68B2drp2oxXPEAQEE5SDDYWT7ijq84GdBKxQ78fsuqcNF1fCeQ5" #pwgen -N 1 -s 96
 graylog_root_username: "admin"
-graylog_root_password_sha2: "e3c652f0ba0b4801205814f8b6bc49672c4c74e25b497770bb89b22cdeb4e951" #echo -n yourpassword | shasum -a 256
+graylog_root_password: "yourstrongpasswrod" #echo -n yourpassword | shasum -a 256
 graylog_root_email: ""
 graylog_root_timezone: "UTC"
 #graylog_alert_check_interval: 60
