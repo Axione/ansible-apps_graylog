@@ -14,7 +14,7 @@
   ansible.builtin.get_url:
     url: "{{ graylog_apt_deb_url }}"
     dest: "{{ graylog_tmp_install_dir }}/{{ graylog_apt_deb_name }}"
-    mode: 0644
+    mode: '0644'
 
 - name: "Install repository deb package"
   ansible.builtin.apt:

@@ -4,7 +4,7 @@
     path: "/etc/graylog/server"
     owner: "graylog"
     group: "graylog"
-    mode: 0750
+    mode: '0750'
 
 - name: "Create directories"
   ansible.builtin.file:
@@ -12,7 +12,7 @@
     state: directory
     owner: "graylog"
     group: "graylog"
-    mode: 0755
+    mode: '0755'
     recurse: true
     follow: true
   loop:
@@ -28,7 +28,7 @@
     dest: "/etc/graylog/server/server.conf"
     owner: "graylog"
     group: "graylog"
-    mode: 0644
+    mode: '0644'
   notify: "Restart graylog-server"
 
 #- name: "Configure graylog defaul "
@@ -37,5 +37,5 @@
 #    dest: "{{ graylog_server_defaults_file_path }}"
 #    owner: "graylog"
 #    group: "graylog"
-#    mode: 0644
+#    mode: '0644'
 #  notify: "Restart graylog-server"
