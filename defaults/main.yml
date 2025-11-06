@@ -23,13 +23,13 @@ graylog_content_packs_dir: "/usr/share/graylog-server/contentpacks"
 # General
 graylog_is_leader: true
 graylog_node_id_file: "/etc/graylog/server/node-id"
-graylog_password_secret: "bwcVGLdWfmRsYemfA9ecUAizDuZyocXgQkYc6XwZSjboQ68B2drp2oxXPEAQEE5SDDYWT7ijq84GdBKxQ78fsuqcNF1fCeQ5" #pwgen -N 1 -s 96
+graylog_password_secret: "secrethashhere" # pwgen -N 1 -s 96
 graylog_root_username: "admin"
-graylog_root_password: "yourstrongpasswrod" #echo -n yourpassword | shasum -a 256
+graylog_root_password: "yourstrongpasswrod" # echo -n yourpassword | shasum -a 256
 graylog_root_email: ""
 graylog_root_timezone: "UTC"
-#graylog_alert_check_interval: 60
-#graylog_disable_sigar: false
+# graylog_alert_check_interval: 60
+# graylog_disable_sigar: false
 graylog_disable_native_system_stats_collector: "false"
 graylog_skip_preflight_checks: false
 graylog_ignore_migration_failures: false
@@ -54,7 +54,7 @@ graylog_http_tls_key_file: "/path/to/graylog.key"
 graylog_http_tls_key_password: ""
 graylog_stream_aware_field_types: false
 graylog_trusted_proxies: ""
-#graylog_http_max_initial_line_length: 4096
+# graylog_http_max_initial_line_length: 4096
 
 # Search
 graylog_elasticsearch_hosts: "http://127.0.0.1:9200"

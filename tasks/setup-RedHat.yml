@@ -1,33 +1,33 @@
 ---
 - name: "Repositories should be updated"
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name: "{{ graylog_yum_rpm_url }}"
     state: "present"
     update_cache: true
-    disable_gpg_check: true     #Here, we are installing the package that contains the gpg key.
+    disable_gpg_check: true
 
 - name: "Graylog server should be installed"
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name: "graylog-server"
     state: present
   notify: Restart graylog-server
 
 - name: "Installing graylog-enterprise-plugins"
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name: "graylog-enterprise-plugins"
     state: present
   when: graylog_install_enterprise_plugins
   notify: Restart graylog-server
 
 - name: "Installing graylog-integrations-plugins"
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name: "graylog-integrations-plugins"
     state: present
   when: graylog_install_integrations_plugins
   notify: Restart graylog-server
 
 - name: "Installing graylog-enterprise-integrations-plugins"
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name: "graylog-enterprise-integrations-plugins"
     state: present
   when: graylog_install_enterprise_integrations_plugins

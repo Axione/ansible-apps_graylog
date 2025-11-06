@@ -5,10 +5,10 @@
       - apt-transport-https
       - coreutils
     state: present
-  register: pkg_result
+  register: __pkg_result
   retries: 12
   delay: 10
-  until: pkg_result is success
+  until: __pkg_result is success
 
 - name: "Download repository deb package"
   ansible.builtin.get_url:
@@ -21,10 +21,10 @@
     deb: "{{ graylog_tmp_install_dir }}/{{ graylog_apt_deb_name }}"
     state: present
     dpkg_options: "force-all"
-  register: pkg_result
+  register: __pkg_result
   retries: 12
   delay: 10
-  until: pkg_result is success
+  until: __pkg_result is success
   notify: Update apt
 
 - name: "Run handlers"
@@ -34,20 +34,20 @@
   ansible.builtin.apt:
     name: "graylog-server"
     state: present
-  register: pkg_result
+  register: __pkg_result
   retries: 12
   delay: 10
-  until: pkg_result is success
+  until: __pkg_result is success
   notify: "Restart graylog-server"
 
 - name: "Installing graylog-enterprise-plugins"
   ansible.builtin.apt:
     name: "graylog-enterprise-plugins"
     state: present
-  register: pkg_result
+  register: __pkg_result
   retries: 12
   delay: 10
-  until: pkg_result is success
+  until: __pkg_result is success
   when: graylog_install_enterprise_plugins
   notify: Restart graylog-server
 
@@ -55,10 +55,10 @@
   ansible.builtin.apt:
     name: "graylog-integrations-plugins"
     state: present
-  register: pkg_result
+  register: __pkg_result
   retries: 12
   delay: 10
-  until: pkg_result is success
+  until: __pkg_result is success
   when: graylog_install_integrations_plugins
   notify: Restart graylog-server
 
@@ -66,9 +66,9 @@
   ansible.builtin.apt:
     name: "graylog-enterprise-integrations-plugins"
     state: present
-  register: pkg_result
+  register: __pkg_result
   retries: 12
   delay: 10
-  until: pkg_result is success
+  until: __pkg_result is success
   when: graylog_install_enterprise_integrations_plugins
   notify: Restart graylog-server

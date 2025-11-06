@@ -22,6 +22,7 @@
 ## Description
 
 Deploy [graylog]() with ansible.
+
 ## Requirements
 
 none
